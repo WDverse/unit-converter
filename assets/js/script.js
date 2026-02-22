@@ -1,34 +1,41 @@
 const inputEl = document.getElementById("input-el");
 const btnEl = document.getElementById("btn-el");
-const unitsEl = document.getElementsByClassName("units-el");
+const unitsEl = document.querySelectorAll(".units-el");
 
-function convertUnit() {
+const unitConverstions = {
+  length: {
+    metric: "meters",
+    imperial: "feet",
+    rate: 3.281,
+  },
+  volume: {
+    metric: "litres",
+    imperial: "gallons",
+    rate: 0.264,
+  },
+  mass: {
+    metric: "kilos",
+    imperial: "pounds",
+    rate: 2.204,
+  },
+};
+
+const convertUnit = () => {
   const inputValue = Number(inputEl.value);
 
-  if (Number.isNaN(inputValue)) {
-    alert("Enter numbers only!")
+  if (isNaN(inputValue)) {
     return;
   }
 
-  for (let i = 0; i < unitsEl.length; i++) {
-    const unitEl = unitsEl[i];
-    const dataAttr = unitEl.dataset.attr;
-    if (dataAttr === "length") {
-      const toFeet = (inputValue * 3.281).toFixed(3);
-      const toMeters = (inputValue / 3.281).toFixed(3);
-      unitEl.textContent = `${inputValue} meters = ${toFeet} feet | ${inputValue} feet = ${toMeters} meters`;
+  unitsEl.forEach((unit) => {
+    const unitType = unit.dataset.attr;
+    const getUnit = unitConverstions[unitType];
 
-    } else if (dataAttr === "volume") {
-      const toGallons = (inputValue * 0.264).toFixed(3);
-      const toLitres = (inputValue / 0.264).toFixed(3);
-      unitEl.textContent = `${inputValue} litres = ${toGallons} gallons | ${inputValue} gallons = ${toLitres} litres`
+    const toImperial = (inputValue * getUnit.rate).toFixed(3);
+    const toMetric = (inputValue / getUnit.rate).toFixed(3);
 
-    } else if (dataAttr === "mass") {
-      const toPounds = (inputValue * 2.204).toFixed(3);
-      const toKilos = (inputValue / 2.204).toFixed(3);
-      unitEl.textContent = `${inputValue} kilos = ${toPounds} pounds | ${inputValue} pounds = ${toKilos} kilos`;
-    }
-  }
-}
+    unit.textContent = `${inputValue} ${getUnit.metric} = ${toImperial} ${getUnit.imperial} | ${inputValue} ${getUnit.imperial} = ${toMetric} ${getUnit.metric}`;
+  });
+};
 
 btnEl.addEventListener("click", convertUnit);
