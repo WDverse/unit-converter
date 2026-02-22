@@ -1,15 +1,12 @@
-// when i click the convert button
-// go over each element in the unitEl
-//  and for each of them take the input value and perform the conversion for each metric unit
-// insert the results in the corresponding <p> tag
-let inputEl = document.getElementById("input-el");
+const inputEl = document.getElementById("input-el");
 const btnEl = document.getElementById("btn-el");
 const unitsEl = document.getElementsByClassName("units-el");
 
 function convertUnit() {
-  let inputValue = Number(inputEl.value);
+  const inputValue = Number(inputEl.value);
 
-  if (isNaN(inputValue)) {
+  if (Number.isNaN(inputValue)) {
+    alert("Enter numbers only!")
     return;
   }
 
@@ -17,15 +14,21 @@ function convertUnit() {
     const unitEl = unitsEl[i];
     const dataAttr = unitEl.dataset.attr;
     if (dataAttr === "length") {
-      unitEl.textContent = inputValue * 3.281;
+      const toFeet = (inputValue * 3.281).toFixed(3);
+      const toMeters = (inputValue / 3.281).toFixed(3);
+      unitEl.textContent = `${inputValue} meters = ${toFeet} feet | ${inputValue} feet = ${toMeters} meters`;
+
     } else if (dataAttr === "volume") {
-      unitEl.textContent = inputValue * 0.264;
+      const toGallons = (inputValue * 0.264).toFixed(3);
+      const toLitres = (inputValue / 0.264).toFixed(3);
+      unitEl.textContent = `${inputValue} litres = ${toGallons} gallons | ${inputValue} gallons = ${toLitres} litres`
+
     } else if (dataAttr === "mass") {
-      unitEl.textContent = inputValue * 2.204;
+      const toPounds = (inputValue * 2.204).toFixed(3);
+      const toKilos = (inputValue / 2.204).toFixed(3);
+      unitEl.textContent = `${inputValue} kilos = ${toPounds} pounds | ${inputValue} pounds = ${toKilos} kilos`;
     }
   }
-  
-  inputEl.value = "";
 }
 
 btnEl.addEventListener("click", convertUnit);
