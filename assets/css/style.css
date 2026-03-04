@@ -48,12 +48,12 @@ h1{
     border-radius: 3px;
     background: whitesmoke;
     color: var(--darkPurple);
+    font-weight: bold;
 }
 
 #btn-el:hover{
     cursor: pointer;
     background: var(--white);
-
 }
 
 #container{
