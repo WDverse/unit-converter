@@ -49,6 +49,7 @@ h1{
     background: whitesmoke;
     color: var(--darkPurple);
     font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 #btn-el:hover{
@@ -69,4 +70,5 @@ h1{
     margin: 20px auto;
     border-radius: 5px;
     width: 95%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
