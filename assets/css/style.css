@@ -49,12 +49,12 @@ h1{
     background: whitesmoke;
     color: var(--darkPurple);
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 #btn-el:hover{
     cursor: pointer;
     background: var(--white);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 #container{
